@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'">
+<title>本地 HTML + JavaScript 测试</title>
+<style>
+body{font-family:"Yu Gothic UI","Meiryo","Microsoft YaHei",sans-serif;max-width:640px;margin:60px auto;padding:0 20px;color:#1f2933}
+button{font-size:18px;padding:10px 24px;border-radius:8px;border:1px solid #2563eb;background:#2563eb;color:#fff;cursor:pointer}
+#msg{margin-top:20px;font-size:18px;font-weight:bold;color:#16a34a;min-height:1.5em}
+.note{background:#f1f5f9;border-radius:8px;padding:12px 16px;line-height:1.7}
+</style>
+</head>
+<body>
+<h1>本地 HTML + JS 测试</h1>
+<p class="note">双击打开本文件后，点击下面的按钮。<br>
+<b>如果出现绿色提示文字，说明这台电脑允许运行本地 HTML + JavaScript</b>，SOP Runner（sop-runner.html）就可以使用。<br>
+如果点击后没有任何反应，说明 JavaScript 被浏览器策略禁用了，请改用其他浏览器（Edge / Chrome）或咨询 IT 部门。<br>
+本页面不联网、不读取任何文件。</p>
+<button id="btn" type="button">点我测试</button>
+<div id="msg"></div>
+<noscript><p style="color:#b91c1c;font-weight:bold">JavaScript 已被禁用 —— 本地 HTML+JS 不可用。</p></noscript>
+<script>
+document.getElementById('btn').addEventListener('click', function () {
+  var d = new Date();
+  var ls = 'localStorage 不可用（进度无法自动保存）';
+  try { localStorage.setItem('__jstest', '1'); localStorage.removeItem('__jstest'); ls = 'localStorage 可用（进度可以自动保存）'; } catch (e) {}
+  document.getElementById('msg').innerHTML = '✅ JavaScript 运行正常！本地 HTML+JS 允许使用。<br><span style="font-weight:normal;font-size:14px;color:#334155">' + ls + '<br>浏览器时间：' + d.toLocaleString() + '</span>';
+});
+</script>
+</body>
+</html>
